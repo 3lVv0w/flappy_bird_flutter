@@ -1,6 +1,19 @@
-import 'package:flappy_bird/utils/utils.dart';
-import 'package:flappy_bird/widgets/score_widget.dart';
+import '../utils/utils.dart';
+import 'score_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart' hide WidgetbookUseCase;
+import 'package:widgetbook_annotation/widgetbook_annotation.dart';
+
+@WidgetbookUseCase(name: "MessageWidget", type: MessageWidget)
+Widget messageWidget(BuildContext context) => Scaffold(
+      body: Center(
+        child: MessageWidget(
+          isStart:
+              context.knobs.boolean(label: "is start", initialValue: false),
+          score: context.knobs.number(label: "score", initialValue: 0),
+        ),
+      ),
+    );
 
 class MessageWidget extends StatelessWidget {
   final bool isStart;

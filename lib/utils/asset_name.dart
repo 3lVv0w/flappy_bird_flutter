@@ -1,9 +1,9 @@
 class AssetName {
-  static Audio audio = Audio();
+  static AudioLocation audio = AudioLocation();
   static Sprites sprites = Sprites();
 }
 
-class Audio {
+class AudioLocation {
   String dieOGG = 'assets/audio/die.ogg';
   String hitOGG = 'assets/audio/hit.ogg';
   String pointOGG = 'assets/audio/point.ogg';
@@ -34,9 +34,9 @@ class Sprites {
   String message = 'assets/sprites/message.png';
   String redPipe = Pipe.getPipeByColor('red');
   String greenPipe = Pipe.getPipeByColor('green');
-  Bird redBird = Bird('red');
-  Bird blueBird = Bird('blue');
-  Bird yellowBird = Bird('yellow');
+  Bird redBird = const Bird('red');
+  Bird blueBird = const Bird('blue');
+  Bird yellowBird = const Bird('yellow');
 }
 
 class Pipe {
@@ -47,7 +47,7 @@ class Pipe {
 class Bird {
   final String color;
 
-  Bird(this.color);
+  const Bird(this.color);
 
   String getDownFlap() => 'assets/sprites/${color}bird-downflap.png';
   String getMidFlap() => 'assets/sprites/${color}bird-midflap.png';

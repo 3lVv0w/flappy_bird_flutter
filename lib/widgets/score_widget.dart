@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart' hide WidgetbookUseCase;
+import 'package:widgetbook_annotation/widgetbook_annotation.dart';
+
+@WidgetbookUseCase(name: "ScoreWidget", type: ScoreWidget)
+Widget scoreWidget(BuildContext context) => Scaffold(
+      body: Center(
+        child: ScoreWidget(
+          isStart:
+              context.knobs.boolean(label: "is start", initialValue: false),
+          score: context.knobs.number(label: "score", initialValue: 0),
+        ),
+      ),
+    );
 
 class ScoreWidget extends StatelessWidget {
   final int score;
   final bool isStart;
+
   const ScoreWidget({Key key, this.score, this.isStart}) : super(key: key);
 
   List<int> splitScore() {

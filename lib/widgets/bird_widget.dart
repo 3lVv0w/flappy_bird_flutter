@@ -1,8 +1,35 @@
 import 'package:flappy_bird/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart';
+import 'package:widgetbook/widgetbook.dart' hide WidgetbookUseCase;
+
+@WidgetbookUseCase(name: "Bird", type: BirdWidget)
+Widget birdWidget(BuildContext context) => Scaffold(
+      body: Center(
+        child: BirdWidget(
+            bird: context.knobs.options(label: "color", options: const [
+          Option<Bird>(
+            value: Bird("red"),
+            label: "red",
+          ),
+          Option<Bird>(
+            value: Bird("yellow"),
+            label: "yellow",
+          ),
+          Option<Bird>(
+            value: Bird("blue"),
+            label: "blue",
+          ),
+        ])),
+      ),
+    );
 
 class BirdWidget extends StatefulWidget {
-  const BirdWidget({Key key}) : super(key: key);
+  final Bird bird;
+  BirdWidget({
+    Key key,
+    this.bird = const Bird("yellow"),
+  }) : super(key: key);
   @override
   _BirdWidgetState createState() => _BirdWidgetState();
 }
@@ -39,21 +66,21 @@ class _BirdWidgetState extends State<BirdWidget>
         }
         if (_animationController.value <= 1 / 3) {
           return Image.asset(
-            AssetName.sprites.yellowBird.getUpFlap(),
+            widget.bird.getUpFlap(),
             height: 40,
             width: 40,
             fit: BoxFit.contain,
           );
         } else if (_animationController.value <= 2 / 3) {
           return Image.asset(
-            AssetName.sprites.yellowBird.getMidFlap(),
+            widget.bird.getMidFlap(),
             height: 40,
             width: 40,
             fit: BoxFit.contain,
           );
         } else {
           return Image.asset(
-            AssetName.sprites.yellowBird.getDownFlap(),
+            widget.bird.getDownFlap(),
             height: 40,
             width: 40,
             fit: BoxFit.contain,
