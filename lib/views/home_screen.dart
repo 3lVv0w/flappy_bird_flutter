@@ -1,6 +1,7 @@
-import 'dart:html'; // For Web only
+// import 'dart:html'; // For Web only
 import 'dart:math';
 
+import 'package:flappy_bird/utils/audio/audio.dart';
 import 'package:flappy_bird/utils/utils.dart';
 import 'package:flappy_bird/widgets/widget.dart';
 
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen>
               getSpeedPipe() - onCollision() <= 42.0) {
             if (isEndGame()) {
             } else if (getSpeedPipe() - onCollision() == 41.0) {
-              PlayAudio.playAudio(AssetName.audio.pointOGG);
+              getAudio().play(AssetName.audio.pointOGG);
               currentPoint++;
             }
           }
@@ -94,12 +95,12 @@ class _HomeScreenState extends State<HomeScreen>
   bool isEndGame() {
     if (_birdPos.pos <= 320 + range * _ranNum[currentPoint] ||
         _birdPos.pos >= 385 + range * _ranNum[currentPoint]) {
-      PlayAudio.playAudio(AssetName.audio.hitOGG);
+      getAudio().play(AssetName.audio.hitOGG);
       isEnd = true;
-      Future.delayed(Duration(milliseconds: 250), () {
-        PlayAudio.playAudio(AssetName.audio.dieOGG);
-        Future.delayed(Duration(milliseconds: 250),
-            () => PlayAudio.playAudio(AssetName.audio.swooshWAV));
+      Future.delayed(const Duration(milliseconds: 250), () {
+        getAudio().play(AssetName.audio.dieOGG);
+        Future.delayed(const Duration(milliseconds: 250),
+            () => getAudio().play(AssetName.audio.swooshWAV));
       });
       return true;
     } else {
@@ -151,14 +152,15 @@ class _HomeScreenState extends State<HomeScreen>
       autofocus: true,
       onKey: (RawKeyEvent event) {
         /// For [Web]
-        if (event.logicalKey.keyId == KeyCode.SPACE &&
+        /// KeyCode.SPACE is 32
+        if (event.logicalKey.keyId == 32 &&
             event.runtimeType == RawKeyDownEvent) {
           if (isStart == false) {
             setState(() {
               isStart = true;
             });
           }
-          PlayAudio.playAudio(AssetName.audio.wingOGG);
+          getAudio().play(AssetName.audio.wingOGG);
           isTap = true;
           Future.delayed(Duration(milliseconds: 150), () {
             isTap = false;
@@ -169,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen>
         // if (event.logicalKey == LogicalKeyboardKey.space &&
         //     event.runtimeType == RawKeyDownEvent) {
         //   if (isStart == false) {
-        //     PlayAudio.playAudio(AssetName.audio.wingOGG);
+        //     getAudio().play(AssetName.audio.wingOGG);
         //     setState(() {
         //       isStart = true;
         //     });
@@ -182,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen>
       },
       child: GestureDetector(
         onTap: () {
-          PlayAudio.playAudio(AssetName.audio.wingOGG);
+          getAudio().play(AssetName.audio.wingOGG);
           if (isStart == false) isStart = true;
           isTap = true;
           Future.delayed(Duration(milliseconds: 150), () {
