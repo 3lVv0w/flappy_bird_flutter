@@ -14,6 +14,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart';
   ],
   devices: [
     Apple.iPhone13ProMax,
+    Desktop.desktop1080p,
   ],
   constructor: WidgetbookConstructor.material,
   widgetsExpanded: true,

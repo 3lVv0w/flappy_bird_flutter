@@ -1,6 +1,6 @@
 class SpeedFactor {
-  double velocity;
-  double speedGame;
+  double? velocity;
+  late double speedGame;
 }
 
 enum BirdState {

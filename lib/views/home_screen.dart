@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
   ScrollController _controller = ScrollController(keepScrollOffset: true);
   int currentPoint = 0;
   int currentOffset = 0;
@@ -34,9 +34,9 @@ class _HomeScreenState extends State<HomeScreen>
 
   FocusNode _spaceNode = FocusNode();
   SpeedFactor _speedFactor = SpeedFactor();
-  BirdPos _birdPos;
+  late BirdPos _birdPos;
   Random random = Random();
-  List<double> _ranNum;
+  late List<double> _ranNum;
 
   void setSpeed(double velocity, double speedGame) {
     _speedFactor.velocity = velocity;
@@ -93,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   bool isEndGame() {
-    if (_birdPos.pos <= 320 + range * _ranNum[currentPoint] ||
-        _birdPos.pos >= 385 + range * _ranNum[currentPoint]) {
+    if (_birdPos.pos! <= 320 + range * _ranNum[currentPoint] ||
+        _birdPos.pos! >= 385 + range * _ranNum[currentPoint]) {
       getAudio().play(AssetName.audio.hitOGG);
       isEnd = true;
       Future.delayed(const Duration(milliseconds: 250), () {

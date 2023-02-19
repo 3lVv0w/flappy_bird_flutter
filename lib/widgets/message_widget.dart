@@ -10,20 +10,20 @@ Widget messageWidget(BuildContext context) => Scaffold(
         child: MessageWidget(
           isStart:
               context.knobs.boolean(label: "is start", initialValue: false),
-          score: context.knobs.number(label: "score", initialValue: 0),
+          score: context.knobs.number(label: "score", initialValue: 0) as int?,
         ),
       ),
     );
 
 class MessageWidget extends StatelessWidget {
-  final bool isStart;
-  final int score;
-  const MessageWidget({Key key, this.isStart, this.score}) : super(key: key);
+  final bool? isStart;
+  final int? score;
+  const MessageWidget({Key? key, this.isStart, this.score}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       duration: Duration(milliseconds: 500),
-      opacity: isStart ? 0 : 1,
+      opacity: isStart! ? 0 : 1,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

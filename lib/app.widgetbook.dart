@@ -19,7 +19,7 @@ void main() {
 }
 
 class HotReload extends StatelessWidget {
-  const HotReload({Key key}) : super(key: key);
+  const HotReload({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +39,17 @@ class HotReload extends StatelessWidget {
             scaleFactor: 3.0,
           ),
           type: DeviceType.mobile,
+        ),
+        Device(
+          name: 'Desktop 1080p',
+          resolution: Resolution(
+            nativeSize: DeviceSize(
+              height: 1080.0,
+              width: 1920.0,
+            ),
+            scaleFactor: 2.0,
+          ),
+          type: DeviceType.desktop,
         ),
       ],
       frames: [

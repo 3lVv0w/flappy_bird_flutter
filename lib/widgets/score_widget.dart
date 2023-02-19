@@ -8,19 +8,19 @@ Widget scoreWidget(BuildContext context) => Scaffold(
         child: ScoreWidget(
           isStart:
               context.knobs.boolean(label: "is start", initialValue: false),
-          score: context.knobs.number(label: "score", initialValue: 0),
+          score: context.knobs.number(label: "score", initialValue: 0) as int?,
         ),
       ),
     );
 
 class ScoreWidget extends StatelessWidget {
-  final int score;
-  final bool isStart;
+  final int? score;
+  final bool? isStart;
 
-  const ScoreWidget({Key key, this.score, this.isStart}) : super(key: key);
+  const ScoreWidget({Key? key, this.score, this.isStart}) : super(key: key);
 
   List<int> splitScore() {
-    int subScore = score;
+    int subScore = score!;
     List<int> res = [];
     while (subScore >= 10) {
       res.add(subScore % 10);
@@ -32,7 +32,7 @@ class ScoreWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (score < 10) {
+    if (score! < 10) {
       return Image.asset('assets/sprites/$score.png');
     } else {
       List<int> _score = splitScore();

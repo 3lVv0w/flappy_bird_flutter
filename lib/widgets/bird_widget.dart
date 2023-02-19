@@ -27,7 +27,7 @@ Widget birdWidget(BuildContext context) => Scaffold(
 class BirdWidget extends StatefulWidget {
   final Bird bird;
   BirdWidget({
-    Key key,
+    Key? key,
     this.bird = const Bird("yellow"),
   }) : super(key: key);
   @override
@@ -36,7 +36,7 @@ class BirdWidget extends StatefulWidget {
 
 class _BirdWidgetState extends State<BirdWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
